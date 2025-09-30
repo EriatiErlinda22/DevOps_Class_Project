@@ -2,8 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["master"]   # ganti ke "main" kalau branch default repo kamu "main"
-
+    branches: ["main"]   
 permissions:
   contents: read
   pages: write
