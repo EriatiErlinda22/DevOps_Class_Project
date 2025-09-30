@@ -2,7 +2,12 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["master"]  # atau "main", sesuaikan dengan branch default kamu
+    branches: ["master"]   # ganti ke "main" kalau branch default repo kamu "main"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   deploy:
@@ -11,6 +16,14 @@ jobs:
       group: "pages"
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/upload-pages-artifact@v2
-      - uses: actions/deploy-pages@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./content   # ini folder yang akan dipublish ke Pages
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
